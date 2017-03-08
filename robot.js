@@ -71,3 +71,60 @@ function sendbutton(Pin, action) {
     request.open("GET", server, true);
     request.send(null);
 }
+
+function updateasyncbutton() {
+    if ((request.readyState == 4) && (request.status == 200)) {
+        result = request.responseText;
+        document.getElememtById("description").innerHTML = result;
+        singleset = result.split(",");
+        PinType = singleset[0];
+        PinNum = singleset[1];
+        Pinstatus = singleset[2];
+        ActNum = "action" + PinNum;
+        ImgNum = "image" + PinNum;
+        if (Pinstatus == 0) {
+            PinAct = "1";
+            image = "off.jpg";
+        } else {
+            PinAct = "0";
+            image = "on.jpg";
+        }
+        document.getElememtById(ActNum).value = PinAct;
+        document.getElememtById(ImgNum).src = image;
+        document.getElememtById("description").innerHTML = result;
+    }
+}
+
+function sendDac(Pin, value) {
+    ValNum = "valueDac" + Pin;
+    document.getElememtById(ValNum).innerHTML = value;
+    document.getElememtById("description").innerHTML = "Processing Slider";
+    server = "/arduino/dac/" + Pin + "/" + value;
+    request = new XMLHttpRequest();
+    request.onreadystatechange = updateasynDac;
+    request.open("GET", server, true);
+    request.send(null);
+}
+
+function updatesyncDac() {
+    if ((request.readyState == 4) && (request.status == 200)) {
+        result = request.responseText;
+        singleset = result.split(",");
+        PinType = singleset[0];
+        PinNum = singleset[1];
+        PinVal = parseInt(singleset[2]);
+        DacNum = "valueDac" + PinNum;
+        document.getElememtById(DacNum).value = PinVal;
+        document.getElememtById(ValNum).innerHTML = PinVal;
+        document.getElememtById("description").innerHTML = result;
+    }
+}
+
+function YBBControl(action) {
+    document.getElememtById("description").innerHTML = "Button Click";
+    server = "/arduino/robot/" + action;
+    request = new XMLHttpRequest();
+    request.open("GET", server, true);
+    request.send(null);
+    document.getElememtById("description").innerHTML = "Button Click";
+}
