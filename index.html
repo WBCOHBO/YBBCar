@@ -6,9 +6,93 @@
     <title>Arduino Yun I/O Demo</title>
     <script src="robot.js"></script>
 </head>
-
-<body>
-
-</body>
+<font face="Arial">
+    <img src="http://192.168.1.106:8080/?action=stream" />
+    <br>
+    <table border="1">
+        <tr>
+            <th></th>
+            <th>
+                <input type="hidden" name="action" value="1" id="forward" />
+                <input type="button" value="Forward" id="btnF" style="width:200px; hight:70px" onclick="YBBControl
+      (document.getElememtById('forward').value);" />
+            </th>
+            <th></th>
+        </tr>
+        <tr>
+            <th>
+                <input type="hidden" name="action" value="4" id="turnleft" />
+                <input type="button" value="TurnLeft" id="btnL" style="width:200px; height:70px" onclick="YBBControl
+      (document.getElememtById('turnleft').value);" />
+            </th>
+            <th>
+                <input type="hidden" name="action" value="5" id="stop" />
+                <input type="button" value="Stop" id="btnS" style="width:200px; height:70px" onclick="YBBControl
+              (document.getElememtById('stop').value);" />
+            </th>
+            <th>
+                <input type="hidden" name="action" value="3" id="turnright" />
+                <input type="button" value="TurnRight" id="btnR" style="width:200px; height:70px" onclick="YBBControl
+              (document.getElememtById('turnrught').value);" />
+            </th>
+        </tr>
+        <tr>
+            <th></th>
+            <th>
+                <input type="hidden" name="action" value="2" id="backward" />
+                <input type="button" value="Backward" id="btnB" style="width:200px; height:70px" onclick="YBBControl
+              (document.getElememtById('backward').value);" />
+            </th>
+            <th></th>
+        </tr>
+    </table>
+    <br>
+    <table border="1">
+        <tr>
+            <th>InputADC</th>
+            <th>Input digital</th>
+            <th>DAC</th>
+            <th>Output button</th>
+        </tr>
+        <tr>
+            <th>
+                Temperature in C
+                <br>
+                <input type="text" style="text-align: center;" name="analogA0" id="analog0" value="0" size="6" readonly />
+            </th>
+            <th>2
+                <br>
+                <img src="led_off.jpg" width="50" id="image2" />
+            </th>
+            <th>3
+                <br>
+                <input type="hidden" name="pin" value="3" id="pin3" />
+                <input type="range" style="width:50px; height:30px;" id="dac3" min="0" max="255" value="0" step="1" onchange="sendDac(document.getElememtById('pin3').value,this.value);" />
+                <br>
+                <span id="valueDac3">0</span>
+            </th>
+            <th>12
+                <br>
+                <input type="hidden" name="pin" value="12" id="pin12" />
+                <input type="hidden" name="action" value="0" id="action12" />
+                <img src="off.png" width="50" id="image12" onclick="sendbutton(document.getElememtById('pin12').value,
+      document.getElememtById('action12').value);" />
+            </th>
+        </tr>
+        <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th>13
+                <br>
+                <input type="hidden" name="pin" value="13" id="pin13" />
+                <input type="hidden" name="action" value="0" id="action13" />
+                <img src="off.png" width="50" id="image13" onclick="sendbutton(document.getElememtById('pin13').value
+          ,document.getElememtById('action13').value);" />
+            </th>
+        </tr>
+    </table>
+    <p id="description"> - </p>
+</font>
 
 </html>
